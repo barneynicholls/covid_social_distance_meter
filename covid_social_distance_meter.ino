@@ -4,6 +4,9 @@ int LED_RED = 2;
 int TRIG_PIN = 6;
 int ECHO_PIN = 5;
 
+long duration;
+int distance;
+
 // the setup function runs once when you press reset or power the board
 void setup() {
   Serial.begin(9600);
@@ -13,7 +16,7 @@ void setup() {
   pinMode(LED_RED, OUTPUT);
   
   // initialize sensor pins as output
-  pinMode(ECHO_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
   pinMode(TRIG_PIN, OUTPUT);
 }
 
@@ -32,11 +35,11 @@ void loop() {
   digitalWrite(TRIG_PIN, LOW);
   
   // Reads the ECHO_PIN, returns the sound wave travel time in microseconds
-  long duration = pulseIn(ECHO_PIN, HIGH);
+  duration = pulseIn(ECHO_PIN, HIGH);
   
   // Calculating the distance
   // Speed of sound wave divided by 2 (there and back)
-  int distance = duration * 0.034 / 2; 
+  distance = duration * 0.034 / 2; 
   
   // Displays the distance on the Serial Monitor
   Serial.print(distance);
